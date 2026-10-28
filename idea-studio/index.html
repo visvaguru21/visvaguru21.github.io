@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f3ee">
+  <title>Idea Studio — Eleven Layers</title>
+  <meta name="description" content="Turn a rough idea into a clear image prompt. Visualise it in your own ChatGPT account, then discuss your custom 3D printed creation with Eleven Layers.">
+  <link rel="canonical" href="https://visvaguru21.github.io/idea-studio/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="studio.css">
+  <script type="module" src="studio.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to Idea Studio</a>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="../" aria-label="Eleven Layers studio card"><img src="mark.svg" alt="Eleven Layers" width="160" height="80"></a>
+      <div class="header-actions"><a class="back-link" href="../">← Studio card</a><button class="quiet-button" id="reset-draft" type="button">Reset draft</button></div>
+    </header>
+    <main id="main">
+      <div class="page-intro"><div><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>Eleven Layers · Idea Studio</p><h1>A little spark.<br><span>A new possibility.</span></h1></div><p class="intro-note">Your words. Your imagination.<br>Let’s give your next creation a direction.</p></div>
+      <div id="draft-notice" class="notice" hidden></div>
+      <noscript><p class="notice">Idea Studio needs JavaScript to prepare prompts. You can also <a href="https://wa.me/916369211299">share your idea on WhatsApp</a>.</p></noscript>
+      <div class="studio-grid">
+        <div class="studio-card">
+          <nav class="step-nav" aria-label="Idea Studio steps"><ol>
+            <li><button type="button" data-step="1" aria-current="step"><span>01</span>Describe</button></li>
+            <li><button type="button" data-step="2" disabled><span>02</span>Shape</button></li>
+            <li><button type="button" data-step="3" disabled><span>03</span>Visualise</button></li>
+            <li><button type="button" data-step="4" disabled><span>04</span>Chat</button></li>
+          </ol></nav>
+          <div class="card-content">
+            <p id="error-message" class="notice error" role="alert" hidden></p>
+            <section class="studio-step" id="step-1" aria-labelledby="heading-1">
+              <p class="step-kicker">01 / THE SPARK</p><h2 id="heading-1" tabindex="-1">What would you love<br>us to make?</h2><p class="step-copy">Start with a rough idea. A person, a shape, a colour, an occasion—anything that helps us see what you imagine.</p>
+              <form id="describe-form">
+                <label for="idea-description">Your idea <span>· English, தமிழ், or both</span></label>
+                <textarea id="idea-description" rows="6" maxlength="4000" required placeholder="A miniature of me in my graduation gown, holding a book, with my name on the base…" aria-describedby="idea-help idea-count"></textarea>
+                <div class="field-meta"><span id="idea-help">A few words are enough to begin.</span><span id="idea-count">0 / 4,000</span></div>
+                <div class="sample-row"><span>Try an example</span><button type="button" data-example="miniature">A miniature</button><button type="button" data-example="vase">A sculptural vase</button><button type="button" data-example="accessory">A useful desk piece</button></div>
+                <fieldset class="category-fieldset"><legend>What kind of creation?</legend><div class="category-options">
+                  <label><input type="radio" name="category" value="miniature"><span>Miniature<span>People &amp; figurines</span></span></label>
+                  <label><input type="radio" name="category" value="vase"><span>Vase or planter<span>Shapes with character</span></span></label>
+                  <label><input type="radio" name="category" value="gift"><span>Gift<span>Made personal</span></span></label>
+                  <label><input type="radio" name="category" value="accessory"><span>Accessory<span>Useful little things</span></span></label>
+                  <label><input type="radio" name="category" value="custom" checked><span>Something else<span>Let’s explore it</span></span></label>
+                </div></fieldset>
+                <div class="step-actions"><span class="small-note">Your idea stays editable.</span><button class="button primary" type="submit">Shape my idea <span aria-hidden="true">→</span></button></div>
+              </form>
+            </section>
+            <section class="studio-step" id="step-2" aria-labelledby="heading-2" hidden>
+              <p class="step-kicker">02 / MAKE IT YOURS</p><h2 id="heading-2" tabindex="-1">A few details.<br>A clearer direction.</h2><p class="step-copy">Share what you know. You can leave every detail below blank.</p>
+              <form id="shape-form">
+                <div id="primary-fields" class="details-grid"></div>
+                <details class="more-details"><summary>More details <span>colour, style, personalisation…</span></summary><div id="extra-fields" class="details-grid"></div></details>
+                <div id="reference-field" class="reference-field" hidden><label for="reference-mode">How should the figure look?</label><select id="reference-mode"><option value="unspecified">I’m not sure yet</option><option value="will_attach">I’ll attach a reference photo in ChatGPT</option><option value="fictional">Make an original fictional figure</option></select><p class="field-help">A recognisable miniature needs a reference photo. Attach it in your ChatGPT chat when you generate the image.</p></div>
+                <div class="step-actions"><button class="text-button" type="button" data-back="1">← Back</button><button class="button primary" type="submit">Prepare my prompt <span aria-hidden="true">→</span></button></div>
+              </form>
+            </section>
+            <section class="studio-step" id="step-3" aria-labelledby="heading-3" hidden>
+              <p class="step-kicker">03 / SEE THE POSSIBILITY</p><h2 id="heading-3" tabindex="-1">Ready for<br>your imagination.</h2><p class="step-copy">Your idea, shaped into a prompt. Give it a read and make any changes you like.</p>
+              <div id="prompt-notices" class="notice subtle" hidden></div>
+              <label for="prepared-prompt">Your image prompt <span>· editable</span></label><textarea id="prepared-prompt" rows="10" maxlength="20000" spellcheck="false"></textarea>
+              <div class="utility-row"><button type="button" id="copy-prompt">Copy prompt</button><button type="button" id="select-prompt">Select text</button><button type="button" id="download-brief">Download my brief</button><button type="button" id="rebuild-prompt">Rebuild prompt</button></div>
+              <button class="button primary wide" type="button" id="open-chatgpt">Copy prompt &amp; open ChatGPT <span aria-hidden="true">↗</span></button>
+              <p class="account-note">Uses your own ChatGPT account and available image allowance.</p>
+              <div class="handoff-guide"><p class="eyebrow">A small detour, then come back</p><ol><li>Paste the prompt into a new ChatGPT chat. Attach a reference photo if needed.</li><li>Generate, refine, and download the image you like.</li><li>Return to this tab to prepare your enquiry.</li></ol><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="inline-link">Open ChatGPT separately ↗</a></div>
+              <button class="button secondary wide" type="button" id="have-image">I have my image — continue <span aria-hidden="true">→</span></button><div class="split-links"><button type="button" class="text-button" data-back="2">← Back</button><button type="button" class="text-button" id="skip-image">Continue without an AI image</button></div>
+            </section>
+            <section class="studio-step" id="step-4" aria-labelledby="heading-4" hidden>
+              <p class="step-kicker">04 / LET’S MAKE IT REAL</p><h2 id="heading-4" tabindex="-1">From your idea<br>to our conversation.</h2><p class="step-copy" id="chat-image-note">Choose where you’d like to discuss your idea. Attach your downloaded image directly in that chat.</p>
+              <form id="chat-form">
+                <details class="more-details order-details"><summary>Add a few requirements <span>optional</span></summary><div class="details-grid"><div><label for="order-quantity">Quantity</label><input id="order-quantity" type="number" min="1" max="100000" step="1" inputmode="numeric" placeholder="Not sure yet"></div><div><label for="order-date">Needed by</label><input id="order-date" type="date"></div><div class="full-field"><label for="order-budget">Approximate budget</label><input id="order-budget" type="text" maxlength="100" placeholder="Per piece or for the whole order"></div><div class="full-field"><label for="order-notes">Anything else?</label><textarea id="order-notes" rows="3" maxlength="1500" placeholder="An occasion, a colour, or something we should know…"></textarea></div></div></details>
+                <label for="enquiry-text">Your enquiry <span>· review and edit</span></label><textarea id="enquiry-text" rows="7" maxlength="20000"></textarea>
+                <div id="enquiry-stale" class="notice" hidden><p>Your requirements changed. Would you like to update the enquiry or keep your edited wording?</p><div class="utility-row"><button type="button" id="update-enquiry">Update enquiry</button><button type="button" id="keep-enquiry">Keep my edited text</button></div></div>
+                <div class="utility-row"><button id="copy-enquiry" type="button">Copy enquiry</button><button id="select-enquiry" type="button">Select text</button></div>
+                <div class="chat-actions"><button class="button primary" type="button" data-chat="whatsapp" id="whatsapp-action">Continue on WhatsApp <span aria-hidden="true">↗</span></button><button class="button secondary" type="button" data-chat="instagram">Copy enquiry &amp; open Instagram <span aria-hidden="true">↗</span></button></div>
+                <p class="form-note">In Instagram, tap <strong>Message</strong> and paste your enquiry.<br>Attach your image and review the message before sending in either chat.</p>
+                <div id="chat-result" class="notice subtle" hidden><strong>Continue in your chat</strong><p id="chat-result-copy"></p><a id="chat-fallback" class="inline-link" target="_blank" rel="noopener noreferrer">Open chat ↗</a></div>
+                <div class="step-actions"><button class="text-button" type="button" data-back="3">← Back</button><span class="small-note">We’ll confirm design, price, and timing in chat.</span></div>
+              </form>
+            </section>
+            <p id="status-message" class="status-message" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+        <aside class="studio-aside" aria-label="Your idea summary"><div class="aside-card"><p class="eyebrow">A little direction.<br>Endless possibilities.</p><div class="layer-mark" aria-hidden="true"><i></i><i></i><i></i></div><p class="aside-heading">Made from<br><em>your imagination.</em></p><div class="idea-summary"><span id="summary-category">Original custom idea</span><p id="summary-text">Tell us about the object you have in mind. We’ll help you prepare the next step.</p></div><div class="studio-images"><img src="../assets/studio-03.jpg" alt="Personalized miniature by Eleven Layers" width="100" height="100" loading="lazy"><img src="../assets/studio-24.jpg" alt="Twisted vase shared by Eleven Layers" width="100" height="100" loading="lazy"><img src="../assets/studio-07.jpg" alt="Personalized name keychains" width="100" height="100" loading="lazy"></div><p class="aside-note">The image is a concept reference. We’ll develop and check the printable design with you.</p></div><a class="pinterest-link" href="https://in.pinterest.com/search/pins/?q=trending%203d%20printed%20ideas&amp;rs=typed" target="_blank" rel="noopener noreferrer">Need a little inspiration?<span>Explore Pinterest ↗</span></a></aside>
+      </div>
+      <p class="privacy-note">Your text draft stays in this tab. You send images directly in your chosen chat.</p>
+    </main>
+    <footer>Eleven Layers Studio <span>Design. Print. Personalize.</span><a href="../">Back to your studio card ↗</a></footer>
+  </div>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title"><h2 id="confirm-title">Clear this draft?</h2><p id="confirm-copy"></p><div class="dialog-actions"><button type="button" class="button secondary" id="confirm-cancel">Keep my draft</button><button type="button" class="button primary" id="confirm-accept">Clear draft</button></div></dialog>
+  <dialog id="prompt-dialog" aria-labelledby="prompt-dialog-title"><h2 id="prompt-dialog-title">Keep your edited prompt?</h2><p>Your idea or details have changed. You can keep your wording or rebuild the prompt from the updated details.</p><div class="dialog-actions"><button type="button" class="button secondary" id="prompt-keep">Keep my edited prompt</button><button type="button" class="button primary" id="prompt-rebuild">Rebuild from details</button></div><button type="button" class="text-button" id="prompt-cancel">Stay here</button></dialog>
+</body>
+</html>
